@@ -1,0 +1,64 @@
+#navbarSupportedContent{
+    width:1800px;
+    margin:0px auto;
+}
+#gap{
+    background:black;
+    width:800px;
+
+}
+#y{
+    width:900px;
+    float:left;
+    background:blue;
+}
+#z{
+    width:900px;
+    float:left;
+    background:orange;
+}
+
+@media screen and (max-width:1800px){
+    #navbarSupportedContent{
+        width:100%;
+    }
+     #y{
+        width:50%;
+    }
+     #z{
+        width:50%;
+    }
+}
+@media screen and (max-width:1700px){
+    #gap{
+        width:300px;
+    }
+}
+@media screen and (max-width:1500px){
+    #gap{
+        width:100px;
+    }
+}
+@media screen and (max-width:1000px){
+    #gap{
+        width:50px;
+    }
+}
+@media screen and (max-width:1000px){
+
+     #y{
+        width:100%;
+    }
+     #z{
+        width:100%;
+    }
+}
+@media screen and (max-width:640px){
+
+     #y{
+        width:500px;
+    }
+     #z{
+        width:300px;
+    }
+}

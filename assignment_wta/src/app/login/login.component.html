@@ -1,0 +1,61 @@
+<div [ngStyle]="{'background-image': geturl(),'background-size':getsize(),'height': '70%','background-position':'center'}">
+<div class="container">
+    <h1 *ngIf="!verify" style="color:blue"> Login Here</h1>
+   <div *ngIf="verify" class="text-info text-md-center"><h1 >Login Done Successfully</h1>
+     <img src="https://i.pinimg.com/564x/f4/24/a7/f424a79b5db74e7daccf18bce4d2f650.jpg" alt="">
+   </div>
+   <div class="login-box">
+      <h1>Admin Login</h1>
+    <form #userForm="ngForm" *ngIf="!verify" (ngSubmit)="onSubmit()" novalidate >
+        <!-- {{userForm.invalid |json}}
+        {{userModel | json}} -->
+        <div class="form-group">
+                <div class="textbox"> 
+               <div class="input-group"> 
+                 
+                  <div class="input-group-prepend">  
+                    
+                    <span class="input-group-text">  
+                       <i class="fas fa-user"></i>  
+                    </span>  
+                  </div>  
+                  <input type="text" placeholder="Username" required minlength=3 #username="ngModel" class="form-control" [class.is-invalid]="username.touched && username.invalid"  name="username" [(ngModel)]="userModel.username">
+               </div>  
+            </div>
+            <div *ngIf="username.errors && (username.invalid || username.touched)">
+                <small class="text-danger" *ngIf="username.errors.required"></small>
+                <small class="text-danger" *ngIf="username.errors.minlength">username number must be atleast 3digit long </small>
+            </div>
+            
+        </div>
+    <div class="form-group">
+        <div class="textbox">
+        <div class="input-group">  
+                  <div class="input-group-prepend">  
+                    <span class="input-group-text">  
+                      <i class="fas fa-lock"></i>
+                     </span>  
+                  </div>  
+        <input type="password" placeholder="Password" required #password="ngModel" class="form-control" [class.is-invalid]="password.touched && password.invalid"  name="password" [(ngModel)]="userModel.password">
+        </div>
+        </div>
+        <div *ngIf="password.errors && (password.invalid || password.touched)">
+            <small class="text-danger" *ngIf="password.errors.required"></small>
+        </div>
+    
+    </div>
+    <button [disabled]="userForm.invalid" type="submit" (click)="Submit()" id="btn" class="btn btn-primary">
+        Sign in
+    </button><br>
+    </form>
+    </div>
+    <h2 style="color:white">ARE YOU A NEW USER ? </h2><button routerLink="/register">SIGN UP HERE</button>
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</div>
+<div style="background-color:black;height:60px"></div>
+
+
+
+
+

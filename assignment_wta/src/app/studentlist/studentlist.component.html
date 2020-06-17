@@ -1,0 +1,23 @@
+<div [ngStyle]="{'background-image': geturl(),'background-size':getsize(),'height': '70%','background-position':'center'}">
+<table class="table table-hover">
+<tr style="color:blue">
+<th>Index</th>
+<th>Username</th>
+<th>Password</th>
+</tr>
+<tr *ngFor="let student of students;let i=index">
+<td>{{i+1}}</td>
+<td>{{student.username}}</td>
+<td>{{student.password}}</td>
+</tr>
+</table>
+</div>
+
+<div>
+    <h1>YOU ARE LOGGED OUT </h1>
+    <h2>VISIT AGAIN :</h2> <button routerLink="/login">SIGN IN </button>
+</div>
+
+
+
+

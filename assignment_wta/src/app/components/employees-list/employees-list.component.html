@@ -1,0 +1,145 @@
+<!-- Toolbar -->
+<mat-toolbar style="background-color:blue" class="header">
+  <div>Employee Management</div>
+  <span class="nav-tool-items">
+    <mat-icon (click)="sidenav.toggle()" class="hamburger">menu</mat-icon>
+  </span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav style="background-color:blue" #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+    [fixedTopGap]>
+    <mat-nav-list>
+      <a style="color:white" mat-list-item routerLinkActive="active" routerLink="/add-employee">
+        <mat-icon>add</mat-icon> Add Employee
+      </a>
+
+    
+
+      <a style="color:white" mat-list-item routerLinkActive="active" routerLink="/employees-list">
+        <mat-icon>format_list_bulleted</mat-icon> View Employees
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+    
+<!-- Title group  -->
+<div [ngStyle]="{'background-image': geturl(),'background-size':getsize(),'height': '100%','background-position':'center'}">
+
+<div class="title-group">
+  
+         
+          <p class="neon_a" >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <button style="color:black"> EMPLOYEES LIST </button>
+           </p>
+          
+      
+  <mat-divider fxFlex="0 0 50px"></mat-divider>
+</div>
+
+<p *ngIf="EmployeeData.length <= 0" class="no-data">There is no employee added yet!</p>
+
+<div class="container" *ngIf="EmployeeData.length > 0">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="_id" style="background-color:lightgreen;color:red">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> Employee ID </th>
+        <mat-divider fxFlex="0 0 50"></mat-divider>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element._id}} </td>
+      </ng-container>
+      extra &nbsp;&nbsp; space
+
+
+      <ng-container matColumnDef="employee_name">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue">        Name   </th>
+        <mat-divider fxFlex="0 0 50"></mat-divider>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.employee_name}} </td>
+      </ng-container>
+      extra &nbsp;&nbsp; space
+
+
+      <ng-container matColumnDef="employee_email">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue">  Email </th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.employee_email}} </td>
+      </ng-container>
+
+      extra &nbsp;&nbsp; space
+     
+
+      <ng-container matColumnDef="gender">
+        extra &nbsp;&nbsp; space
+
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> Gender </th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.gender}} </td>
+      </ng-container>
+      extra &nbsp;&nbsp; space
+      extra &nbsp;&nbsp; space
+      
+
+      <ng-container matColumnDef="section">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> Jobtitle </th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.section}} </td>
+      </ng-container>
+
+     
+      <ng-container matColumnDef="dept">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> Evaluation type </th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.dept}} </td>
+      </ng-container>
+      <ng-container matColumnDef="empcode">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> Emp code </th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.empcode}} </td>
+      </ng-container>
+      <ng-container matColumnDef="sp">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue">supervisor? </th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.sp}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="punc">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> PR</th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.punc}} </td>
+      </ng-container>
+      
+  
+
+      <ng-container matColumnDef="or">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> OR</th>
+        <td mat-cell *matCellDef="let element" style="background-color:yellow;color:black"> {{element.or}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef style="background-color:lightgreen;color:blue"> Action </th>
+        <td mat-cell *matCellDef="let element; let i = index;">
+          <button mat-raised-button color="primary" class="push-right"
+            [routerLink]="['/edit-employee/', element._id]">Edit</button> 
+          <button mat-raised-button color="accent" class="push-right" (click)="deleteEmployee(i, element)">Delete</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+
+
+
+

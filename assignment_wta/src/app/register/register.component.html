@@ -1,0 +1,125 @@
+
+  <div id="image">
+  <div class="container">
+    <h1 style="color:white" *ngIf="!submitted">Admin Registration</h1>
+   <div *ngIf="submitted" class="text-info text-md-center"><h1 >Registration Done Successfully</h1>
+     <img src="https://i.pinimg.com/564x/f4/24/a7/f424a79b5db74e7daccf18bce4d2f650.jpg" alt="">
+   </div>
+    <form #userForm="ngForm" *ngIf="!submitted"(ngSubmit)="onSubmit()" novalidate >
+        <!-- {{userForm.valid}}
+        {{userForm.value |json}}
+        {{userModel | json}} -->
+        <div class="form-group">
+            <label style="color:white">First Name</label>
+            <input style="background-color:silver" type="text"  required minlength=3 #firstname="ngModel" class="form-control" [class.is-invalid]="firstname.touched && firstname.invalid"  name="firstname" [(ngModel)]="userModel.firstname">
+            <div *ngIf="firstname.errors && (firstname.invalid || firstname.touched)">
+                <small class="text-danger" *ngIf="firstname.errors.required"></small>
+                <small class="text-danger" *ngIf="firstname.errors.minlength">Firstname length must be atleast 3digit long </small>
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="color:white">Last Name</label>
+            <input style="background-color:silver" type="text"  required minlength=3 #lastname="ngModel" class="form-control" [class.is-invalid]="lastname.touched && lastname.invalid"  name="lastname" [(ngModel)]="userModel.lastname">
+            <div *ngIf="lastname.errors && (lastname.invalid ||lastname.touched)">
+                <small class="text-danger" *ngIf="lastname.errors.required"></small>
+                <small class="text-danger" *ngIf="lastname.errors.minlength">Lastname length must be atleast 3digit long </small>
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="color:orange"><strong>User Name</strong></label>
+            <input style="background-color:silver" type="text"  required minlength=3 #username="ngModel" class="form-control" [class.is-invalid]="username.touched && username.invalid"  name="username" [(ngModel)]="userModel.username">
+            <div *ngIf="username.errors && (username.invalid || username.touched)">
+                <small class="text-danger" *ngIf="username.errors.required"></small>
+                <small class="text-danger" *ngIf="username.errors.minlength">Username length must be atleast 3digit long </small>
+                
+            </div>
+            <small class="text-danger" *ngIf="exist">user already exist</small>
+        </div>
+
+    <div class="form-group">
+        <label style="color:white">Email</label>
+        <input style="background-color:silver" type="email"  required #email="ngModel" class="form-control" [class.is-invalid]="email.touched && email.invalid" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email" [(ngModel)]="userModel.email">
+        <div *ngIf="email.errors && (email.invalid || email.touched)">
+            <small class="text-danger" *ngIf="email.errors.required"></small>
+            <small class="text-danger" *ngIf="email.errors.pattern">please enter valid email</small>
+        </div>
+        <small class="text-danger" *ngIf="exist">user already exist</small>
+    </div>
+    <div class="form-group">
+        <label style="color:orange">Phone</label>
+        <input style="background-color:silver" type="tel"  required #phone="ngModel" class="form-control" [class.is-invalid]="phone.touched && phone.invalid" pattern="^[0-9]{10}$" name="phone" [(ngModel)]="userModel.phone">
+        <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+            <small class="text-danger" *ngIf="phone.errors.required"></small>
+            <small style="color:white" *ngIf="phone.errors.pattern">10 digits</small>
+            
+        </div>
+    </div>    
+
+   <div class="form-group">
+            <label style="color:white">Registration Code</label>
+            <input style="background-color:silver" type="text"  required minlength=3 #address="ngModel" class="form-control" [class.is-invalid]="address.touched && address.invalid"  name="address" [(ngModel)]="userModel.address">
+            <div *ngIf="address.errors && (address.invalid || address.touched)">
+                <small class="text-danger" *ngIf="address.errors.required"></small>
+                <small class="text-danger" *ngIf="address.errors.minlength">Address length must be atleast 3digit long </small>
+                
+            </div>
+        </div>
+    
+    <div class="form-group">
+        <label style="color:orange"><strong>Password</strong></label>
+        <input style="background-color:silver" type="password"  required #password="ngModel" class="form-control" [class.is-invalid]="password.touched && password.invalid"  name="password" [(ngModel)]="userModel.password">
+        <div *ngIf="password.errors && (password.invalid || password.touched)">
+            <small class="text-danger" *ngIf="password.errors.required"></small>
+            <small class="text-danger" *ngIf="password.errors.pattern">password number must be of length 8 digits</small>
+            
+        </div>
+    </div>
+    
+    <div class="form-group">
+            <label style="color:white">Confirm Password</label>
+            <input style="background-color:silver" type="password"  required minlength=3 #confirmpassword="ngModel" class="form-control" [class.is-invalid]="confirmpassword.touched && confirmpassword.invalid"  name="confirmpassword" [(ngModel)]="userModel.confirmpassword">
+            <div *ngIf="confirmpassword.errors && (confirmpassword.invalid || confirmpassword.touched)">
+                <small class="text-danger" *ngIf="confirmpassword.errors.required"></small>
+                <small class="text-danger" *ngIf="confirmpassword.errors.minlength">password number must be of length 8 digits </small>
+                
+            </div>
+               <small class="text-danger" *ngIf="userModel.password!=userModel.confirmpassword">Not matched </small>
+        </div>
+    <!-- <div class="mb-3">
+        <label for="">Time Preference</label>
+        <div class="form-check">        {{userForm.value |json}}
+        {{userModel | json}}
+        <input type="radio" class="form-check-input" name="timePreference" value="morning" [(ngModel)]="userModel.timePreference">
+        <label for="" class="form-check-label">Morning</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="timePreference" value="evening" [(ngModel)]="userModel.timePreference">
+            <label for="" class="form-check-label">Evening</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+            <label >Last Name</label>
+            <input type="text"  required minlength=3 #name="ngModel" class="form-control" [class.is-invalid]="name.touched && name.invalid"  name="name" [(ngModel)]="userModel.name">
+            <div *ngIf="name.errors && (name.invalid || name.touched)">
+                <small class="text-danger" *ngIf="name.errors.required">name is must</small>
+                <small class="text-danger" *ngIf="name.errors.minlength">name number must be atleast 3digit long </small>
+                
+            </div>
+        </div>
+
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" name="subscribe" [(ngModel)]="userModel.subscribe">
+        <label for="" class="form-check-label">
+        send me promotional offers
+        </label>
+    </div> -->
+    <button [disabled]="userForm.invalid || userModel.password!=userModel.confirmpassword" type="submit" (click)="register()" class="btn btn-primary">
+    Register
+    </button>
+    </form>
+</div>
+</div>
